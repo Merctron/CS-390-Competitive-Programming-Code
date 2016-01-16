@@ -4,10 +4,13 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 
-public class Main {
+public class Snail {
+
+    /*Solution to the Snail problem*/
 	
 	static BufferedReader cin;
     static StringTokenizer tk;
+
     public static String token () throws IOException {
         try {
             while (!tk.hasMoreTokens())
@@ -18,23 +21,29 @@ public class Main {
         }
         return null;
     }
+
     public static int gInt () throws IOException {
         return Integer.parseInt(token());
     }
+
     public static long gLong () throws IOException {
         return Long.parseLong(token());
     }
+
     public static double gDouble () throws IOException {
         return Double.parseDouble(token());
     }
+
     public static void init () {
         cin = new BufferedReader(new InputStreamReader(System.in));
         tk = new StringTokenizer("");
     }
+
     public static void quit () throws IOException {
         System.out.flush();
         System.exit(0);
     }
+
     /*
      * H - Height of Well
      * U - Distance travelled
