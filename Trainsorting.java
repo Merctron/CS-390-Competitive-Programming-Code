@@ -23,49 +23,84 @@ public class Trainsorting {
                 mTrains[j] = 0;
             }
 
-            for (int p = 0; p < c; p++) {
-                if (p == 0) {
-                    fTrains[p] = trains[p];
-                    bTrains[p] = trains[p];
-                    mTrains[p] = 1;
-                }
-                else {
-
-                    for (int r = 0; r < p; r++) {
-                        int lm = mTrains[r];
-                        if (trains[p] >= fTrains[r]) {
-                            lm++;
-                            if (lm > mTrains[p]) {
-                                mTrains[p] = lm;
-                                fTrains[p] = trains[p];
-                                bTrains[p] = bTrains[r];
-                            }
-                        }
-                        else if (trains[p] <= bTrains[r]) {
-                            lm++;
-                            if (lm > mTrains[p]) {
-                                mTrains[p] = lm;
-                                fTrains[p] = fTrains[r];
-                                bTrains[p] = trains[p];
-                            }
+            for (int p = c - 1; p >= 0; p--) {
+                fTrains[p] = 1;
+                for (int q = p + 1; q < c; q++) {
+                    if (trains[p] < trains[q]) {
+                        if (fTrains[q] + 1 > fTrains[p]) {
+                            fTrains[p] = fTrains[q] + 1;
                         }
                         else {
-                            if (lm > mTrains[p]) {
-                                mTrains[p] = lm;
-                                fTrains[p] = fTrains[r];
-                                bTrains[p] = bTrains[r];
-                            }
+                            fTrains[p] = fTrains[p];
                         }
-
                     }
-
                 }
             }
+
+            for (int p = c - 1; p >= 0; p--) {
+                bTrains[p] = 1;
+                for (int q = p + 1; q < c; q++) {
+                    if (trains[p] > trains[q]) {
+                        if (bTrains[q] + 1 > bTrains[p]) {
+                            bTrains[p] = bTrains[q] + 1;
+                        }
+                        else {
+                            bTrains[p] = bTrains[p];
+                        }
+                    }
+                }
+            }
+
+            int mlen = 0;
+            for (int k = 0; k < c; k++) {
+                if (mlen < fTrains[k] + bTrains[k] - 1) {
+                    mlen = fTrains[k] + bTrains[k] - 1;
+                }
+            }
+//
+//            for (int p = 0; p < c; p++) {
+//                if (p == 0) {
+//                    fTrains[p] = trains[p];
+//                    bTrains[p] = trains[p];
+//                    mTrains[p] = 1;
+//                }
+//                else {
+//
+//                    for (int r = 0; r < p; r++) {
+//                        int lm = mTrains[r];
+//                        if (trains[p] >= fTrains[r]) {
+//                            lm++;
+//                            if (lm > mTrains[p]) {
+//                                mTrains[p] = lm;
+//                                fTrains[p] = trains[p];
+//                                bTrains[p] = bTrains[r];
+//                            }
+//                        }
+//                        else if (trains[p] <= bTrains[r]) {
+//                            lm++;
+//                            if (lm > mTrains[p]) {
+//                                mTrains[p] = lm;
+//                                fTrains[p] = fTrains[r];
+//                                bTrains[p] = trains[p];
+//                            }
+//                        }
+//                        else {
+//                            if (lm > mTrains[p]) {
+//                                mTrains[p] = lm;
+//                                fTrains[p] = fTrains[r];
+//                                bTrains[p] = bTrains[r];
+//                            }
+//                        }
+//
+//                    }
+//
+//                }
+//            }
 
             //Recursive
             //int mt = maxTrains(trains, 0, -1, -1);
             if (c > 0) {
-                System.out.println(mTrains[c - 1]);
+                System.out.println(mlen);
             }
             else {
                 System.out.println(0);
